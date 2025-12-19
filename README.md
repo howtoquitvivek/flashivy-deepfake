@@ -1,4 +1,4 @@
-# **Falshivy-Deepfake v1**
+# **Flashivy-Deepfake v1**
 
 Deepfake detection using deep learning.
 This version establishes a **baseline CNN model** trained on images extracted from FaceForensics++ videos.
@@ -34,9 +34,12 @@ FaceForensics++ is a standard benchmark dataset widely used in deepfake detectio
 
 ## 📥 Dataset Download
 
-Dataset is downloaded using the official FaceForensics++ script.
-To obtain the script, fill out the Google Form available on the  
+Dataset is downloaded using the official FaceForensics++ script.  
+To obtain access or use the original script included in this repository, users must fill out the Google Form and accept the terms available on the  
 [FaceForensics website](http://niessnerlab.org/projects/roessler2018faceforensics.html).
+
+> Note: The dataset itself is not included in this repository. Users must download the data directly from the official source in accordance with the FaceForensics++ Terms of Service.
+
 
 ### Download REAL videos
 
@@ -103,14 +106,41 @@ python check_cuda.py
 - Image-based deepfake classification
 - CNN-based training pipeline
 - FaceForensics++ data
+- Grad-CAM explainability
 
 **Not included**
 
 - Video-level modeling
-- Explainability (Grad-CAM)
 - Cross-dataset testing
 
-These are planned for future versions.
+
+---
+
+## 📊 Results
+
+The model achieves high validation accuracy on the FaceForensics++ dataset due to the presence of clear manipulation artifacts in face-swap deepfakes. This version focuses on establishing a strong image-based baseline, while robustness across datasets is addressed in later versions.
+
+## 🔍 Explainability (Grad-CAM)
+
+To interpret the model’s predictions, Grad-CAM is used to visualize which facial regions contribute most to the real vs fake classification.
+
+Grad-CAM heatmaps indicate that the model primarily focuses on facial regions such as the eyes, mouth, cheeks, and skin texture, which are known to contain manipulation artifacts in face-swap deepfakes.
+
+### Run Grad-CAM
+
+```bash
+PYTHONPATH=. python - <<EOF
+from explainability.grad_cam import plot_real_vs_fake
+
+plot_real_vs_fake(
+    "data/faces/real/IMAGE_NAME.jpg",
+    "data/faces/fake/IMAGE_NAME.jpg"
+)
+EOF
+
+![Grad-CAM Comparison](assets/gradcam_comparison.png)
+Grad-CAM visualizations show that for real images, the model focuses on identity-related facial regions such as the eyes, while for fake images, attention is distributed across facial textures and blending regions, indicating the presence of manipulation artifacts.
+```
 
 ---
 

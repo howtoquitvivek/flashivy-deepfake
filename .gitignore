@@ -1,0 +1,5 @@
+/venv
+/data
+/ff_data
+__pycache__/
+*.pyc

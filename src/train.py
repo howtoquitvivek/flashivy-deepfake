@@ -1,3 +1,4 @@
+import os
 import torch
 from torch.utils.data import DataLoader
 from dataset import FaceDataset
@@ -62,5 +63,6 @@ for epoch in range(5):
         f"Val Acc: {val_acc:.4f}"
     )
 
-torch.save(model.state_dict(), "deepfake_v1.pth")
-print("Model saved as deepfake_v1.pth")
+os.makedirs("weights", exist_ok=True)
+torch.save(model.state_dict(), "weights/deepfake_v1.pth")
+print("Model saved to weights/deepfake_v1.pth")
