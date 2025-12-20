@@ -137,10 +137,10 @@ plot_real_vs_fake(
     "data/faces/fake/IMAGE_NAME.jpg"
 )
 EOF
+```
 
 ![Grad-CAM Comparison](assets/gradcam_comparison.png)
 Grad-CAM visualizations show that for real images, the model focuses on identity-related facial regions such as the eyes, while for fake images, attention is distributed across facial textures and blending regions, indicating the presence of manipulation artifacts.
-```
 
 ---
 
